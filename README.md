@@ -41,10 +41,11 @@ This is the submission repository for the [OpenDataBenin project](https://github
   ```
   **YOUR_NAME**
 
-  I am submitting a new 
+  I am submitting : 
 
-  * [ ] dataset
-  * [ ] visualization
+  * [ ] a new dataset
+  * [ ] a new visualization
+  * [ ] an update of dataset : (add DOI number here)
   
   ### Information on submission 
 
