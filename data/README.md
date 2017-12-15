@@ -1,6 +1,6 @@
 ## Data repository
 
-This folder should contain the data to submit, in a well organised structure. If you are submitting data-visualization only, just let this folder empty.
+This folder should contain the data to submit, in a well organised structure. If you are only submitting visualization for data  already indexed, just let this folder empty and don't forget to put the original data DOI as `Data source` in your submission.
 
 The data should be computer-parsable, preferentially in a human readable format and encoded using UTF-8. To facilitate data distribution, the preferred format are `TSV`, `CSV`, `JSON`, `XML` and `YAML`, which are two of the most popular formats for data serialization.
 
