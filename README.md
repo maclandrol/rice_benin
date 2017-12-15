@@ -50,15 +50,15 @@ This is the submission repository for the [OpenDataBenin project](https://github
 
   **Author(s)**:   
   **Submission title**: 
-  **Source (OC if original content)**:   
-  **Repository Link**:  
-  **Keywords**:  
+  **Data source (DOI, reference or OC if original content)**:   
+  **Link to you repository if applicable**:  
+  **Keywords (up to 5)**:  
 
   ### Results
 
   * [ ] Submitted data/visualization/code is open source.
   * [ ] The data was obtained legally and I am not infringing any license.
-
+  
   ---
 
   **EDITOR**
