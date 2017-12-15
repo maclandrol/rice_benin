@@ -1,7 +1,7 @@
 
 ### OpenDataBenin submission repository
 
-This is the submission repository for the [OpenDataBenin project](https://rescience.github.io).
+This is the submission repository for the [OpenDataBenin project](https://github.com/OpenDataBenin).
 
 ### How to submit data or dataviz ?
 
