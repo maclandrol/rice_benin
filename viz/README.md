@@ -1,8 +1,8 @@
 ## Visualization repository
 
-This folder should contain the data-visualization you are submitting.  If you are submitting data only, just let this folder empty.
+This folder should contain the data visualization you are submitting.  If you are submitting data only, just let this folder empty. **We only accept visualization on data that we have already indexed with an unique DOI or you are submitting alongside with the data visualization**
 
-Visualisation can be interactive or static.
+Visualization can be interactive or static.
 
 ### Interactive dataviz
 
