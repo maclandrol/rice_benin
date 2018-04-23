@@ -43,22 +43,22 @@ This is the submission repository for the [OpenDataBenin project](https://github
 
   I am submitting : 
 
-  * [ ] a new dataset
-  * [ ] a new visualization
+  * [x] a new dataset
+  * [x] a new visualization
   * [ ] an update of dataset : (add DOI number here)
   
   ### Information on submission 
 
-  **Author(s)**:   
-  **Submission title**: 
+  **Author(s)**:   Emmanuel Noutahi
+  **Submission title**:  Importation massive de riz au Bénin
   **Data source (DOI, reference or OC if original content)**:   
   **Link to you repository if applicable**:  
-  **Keywords (up to 5)**:  
+  **Keywords (up to 5)**: riz, benin, contrebande, production
 
   ### Results
 
-  * [ ] Submitted data/visualization/code is open source.
-  * [ ] The data was obtained legally and I am not infringing any license.
+  * [x] Submitted data/visualization/code is open source.
+  * [x] The data was obtained legally and I am not infringing any license.
   
   ---
 
