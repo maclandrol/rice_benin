@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<style>
+
+body{
+	width: 50rem;
+	margin: auto;
+}
+
+.vizdiv{
+     width: 600px;
+     height: 400px;
+     margin-top: 2em;
+     margin-bottom: 5em;
+}
+
+.d3plus_title text tspan{
+	max-width: 100px;
+	font-weight: "bold";
+	white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#geodata{
+	width:100%;
+	min-height: 200px;
+}
+
+#trademap{
+	height: 500px;
+}
+
+#ricebenin{
+	height: 500px;
+}
+</style> 
+<script src="trade.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://d3plus.org/js/d3.js" type="text/javascript"></script>
+<script src="https://d3plus.org/js/topojson.js" type="text/javascript"></script>
+<script src="https://d3plus.org/js/d3plus.js" type="text/javascript"></script>
+
+</head>
+
+
+  <body>
+
+<div class="vizdiv" id="tradeplot"></div>
+
+<div class="vizdiv" id="trademap"> </div>
+
+<div class="vizdiv" id="geodata"> </div>
+
+<div class="vizdiv" id="riceimport"> </div>
+
+<div class="vizdiv" id="ricebenin"> </div>
+
+<script>
+(function(){
+
+	var mapcolor = d3.scale.ordinal()
+    .domain([1, 95])
+    .range(["#f0a40f", "#d20aee", "#5bbfe9", "#3bcd4d", "#ef1b64", "#a37060", "#5e70ed", "#e93903", "#86c194", "#ee97d6", "#798217", "#dd2ab1", "#777a9b", "#bc651f", "#d6ad6a", "#aaacff", "#258987", "#a2bf32", "#129031", "#c95189", "#c3afaa", "#b256c4", "#d54e4f", "#f59d81", "#1582c3", "#966bb0", "#847d4b", "#2ec7be", "#288c5e", "#7dc567", "#965bed", "#aeba68", "#fd95ac", "#88bdbf", "#9d761b", "#cdb301", "#33ca93", "#e8228a", "#777e73", "#a86988", "#c6a9d5", "#f4163d", "#fc9c54", "#6ec92f", "#247ed8", "#f88deb", "#d94c23", "#c35c62", "#bdb47f", "#68baff", "#dea696", "#7075c4", "#c7b351", "#59884a", "#95b7d4", "#dd3e76", "#d0a2ea", "#b949d9", "#d3419d", "#ddac37", "#b7664d", "#b25f9c", "#aa6f37", "#69835f", "#3a859b", "#a0b2ea", "#49c3d4", "#4b8b13", "#9065d8", "#c95b39", "#e39fc0", "#e63a3c", "#9e63c4", "#48cd2e", "#ff9b3b", "#f61209", "#9dbf4f", "#cb33d9", "#67c94d", "#2b79ec", "#eba553", "#5f8473", "#95bcaa", "#ae6875", "#897d35", "#ec1e77", "#d1ad80", "#608733", "#cc44b1", "#8b7874", "#e13c63", "#73c57d", "#967188", "#aeb6aa", "#96774c", "#52c6a9", "#bab0bf", "#5d809b", "#a8bb7f", "#687baf", "#8174af", "#b36761", "#7f7e5f", "#e8a56a", "#70834a", "#8db3ff", "#cb5a21", "#a3b6bf", "#ce5076", "#c3b469", "#e598eb", "#eb9eab", "#5877d8", "#5cc966", "#c3539d", "#daac52", "#b7b934", "#c65b4e", "#f19e96", "#517cc3", "#f99c6b", "#896dc4", "#a961b0", "#e43b50", "#cab335", "#d8a7ab", "#4781af", "#f696c1", "#afb1d5", "#ac4ded", "#d93f89", "#8d729c", "#d0a8c0"]);
+
+	var viz_d3viz_87 = d3plus.viz()
+	    .container('#tradeplot')
+	    .type('line')
+	    .color('Trade Flow')
+		.text('Trade Flow')
+		.legend({'font': {'size': 12},'data': false,'size': [20,50]})
+		.y({'grid': false,'value': 'Trade Value (US$)'})
+		.x({'ticks': {'labels': [1998,2000,2002,2004,2006,2008,2010,2012,2014,2016]},'grid': false,'value': 'Year'})
+		.id('Trade Flow')
+	    .data(trade_data)
+	    .title({'value':"Importations et Exportations déclarée par le Bénin entre 1998 et 2016", 'sub': "Source: ONU/Comtrade"})
+	    .draw();
+
+    var viz_d3viz_94 = d3plus.viz()
+        .container('#trademap')
+        .data(import_dt_2016)
+        .type("tree_map")
+        .id(['L1','L2'])
+        .size('Trade Value (US$)')
+		.title({"value":"Biens et services importés en 2016 par le Bénin", 'sub': "Source: ONU/Comtrade"})
+        .legend(false)
+        .color({
+	      "scale": mapcolor,
+	      "value": "L1"
+	    })
+        .tooltip({'children': false})
+        .depth(0)
+		.footer({'value': '35.7 % des importations proviennent de la Thaïlande, l\'Inde et la Chine, essentiellement en raison de l\'importation abondant de riz.', 'padding': 20, 'font': {'familly': '"Helvetica Neue", Lato, Arial, sans-serif;', 'size':12}})
+		.draw();
+
+
+	viz_d3viz_94.format({
+	      "text": function(text, params) {
+	        
+	        if (text === "Trade Value (US$)") {
+	          return "Trade Value";
+	        }
+	        else {
+	          return d3plus.string.title(text, params);
+	        }
+	        
+	      },
+	      "number": function(number, params) {
+	        
+	        var formatted = d3plus.number.format(number, params);
+	        
+	        if (params.key === "Trade Value (US$)") {
+	          return "$" + formatted + " USD";
+	        }
+	        else {
+	          return formatted;
+	        }
+	     }})
+        .ui([
+        	{
+        	"method" : function(value){
+        		if (value == 'Import'){
+					viz_d3viz_94.data(import_dt_2016)
+					.title({"value":"Biens et services importés en 2016 par le Bénin", 'sub': "Source: ONU/Comtrade"})
+					.footer({'value': '35.7 % des importations proviennent de la Thaïlande, l\'Inde et la Chine, essentiellement en raison de l\'importation abondante de riz.', 'padding': 20, 'font': {'familly': '"Helvetica Neue", Lato, Arial, sans-serif;', 'size':12}});
+        		}
+        		else{
+					viz_d3viz_94.data(export_dt_2016)
+					.title({"value":"Biens et services exportés en 2016 par le Bénin",  'sub': "Source: ONU/Comtrade"})
+					.footer({'value': '59,2 % des recettes d’exportations proviennent du coton brut et de l\'anacarde, principalement destinés à des pays de l\'Asie (Inde, Malaisie, Bangladesh, Chine)', 'padding': 20, 'font': {'familly': '"Helvetica Neue", Lato, Arial, sans-serif;', 'size':12}});
+
+        		}
+        		viz_d3viz_94.draw();
+			},
+        	"label": "Échanges",
+        	"type": "toggle",
+        	"font":{"size":15, "weight": 400},
+        	"value"  : ["Import", "Export"]
+      	}
+	    ]);
+
+
+
+    var viz_d3viz_2 = d3plus.viz()
+        .container('#geodata')
+        .data(geo_data)
+        .type("geo_map")
+        .coords({'value': 'https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries-sans-antarctica.json', 'projection':'equirectangular', 'threshold': 0.2})
+        .id('Country')
+        .color({'heatmap':['#f0f9e8','#ccebc5','#a8ddb5','#7bccc4','#4eb3d3','#2b8cbe','#08589e'], 'value':'Riz importé ($US)'})
+        .text('Pays')
+        .tooltip(['Pays','Population','Riz importé ($US)','Quantité (kg)'])
+        .footer({'value': 'Le Bénin importe bien plus de riz "per capita" que la plupart des autres pays. La carte montre, à titre comparatif le montant total des importations de certains pays,. Les pays de l\'Asie (souvent producteurs de riz) sont exclus', 'padding': 20, 'font': {'familly': '"Helvetica Neue", Lato, Arial, sans-serif;', 'size':12}})
+        .draw(); 
+
+
+    var viz_rice_import = d3plus.viz()
+        .container('#riceimport')
+        .type('bar')
+        .color('Reporter')
+		.text('Reporter')
+		.tooltip(['Trade Value (US$)','Netweight (kg)'])
+		.legend({'font': {'size': 12},'data': false,'size': [20,40]})
+		.y({'grid': false, 'value':'Trade Value (US$)'})
+		.x({'grid': false, 'value':'Year'})
+		.id('Reporter')
+		.title({"value":'Importation de riz au Bénin, Togo et Nigeria', 'sub': "Source: ONU/Comtrade"})
+        .data(rice_import)
+        .footer({'value': 'L\'importation du riz au Togo reste constante tandis qu\'au Bénin, elle est en pleine croissance et connait des pics à chaque fois qu\'un déclin est observé au Nigéria. Les importations du Nigéria en 2015 sont manquantes', 'padding': 20, 'font': {'familly': '"Helvetica Neue", Lato, Arial, sans-serif;', 'size':12}})
+        .draw();
+
+     var viz_ricebenin = d3plus.viz()
+        .container('#ricebenin')
+        .type('line')
+        .color({'value':'Attribute_Description', 'scale':['#f77f6c', '#736ad8','#2DC48A']})
+		.text('Attribute_Description')
+		.legend({'font': {'size': 12},'data': false})		
+		.y({'value': 'Total en tonne', 'grid':false})
+		.x({'grid': false,'value': 'Année'})
+		.id('Attribute_Description')
+		.title({"value":"Quantité de riz produit, importé et nécessaire au Bénin","sub":"Source: USDA/ CCR-B/ INSAE"})
+        .footer({'value': 'Les importations de riz comblent largement le déficit engendré par la production insuffisante. Notez qu\'il s\'agit d\'une estimation très conservative des besoins, basée sur une consommation annuelle de 35 kg/an/habitant et sur des données historiques du CCR-B (voir code). Les importations ne concernent que celles destinées à la consommation locale (corrigé pour tenir compte des exportations', 'padding': 20, 'font': {'familly': '"Helvetica Neue", Lato, Arial, sans-serif;', 'size':12}})
+		.data(benin_rice)
+
+	viz_ricebenin.format({
+	      "text": function(text, params) {
+	        
+	        if (text === "Total en tonne") {
+	          return "Quantité (en tonne)";
+	        }
+	        else {
+	          return text;
+	        }
+	        
+	      },
+	      "number": function(number, params) {
+	        
+	        var formatted = d3plus.number.format(number, params);
+	        
+	        if (params.key === "Total en tonne") {
+	        	return formatted;
+	        }
+	        else {
+	          return number;
+	        }
+	     }})
+        .draw();
+
+})();
+
+
+</script>
+
+</body>
+
+</html>
